@@ -1,1 +1,233 @@
-repositorio do codigo
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<locale.h>
+#include<conio.h>
+#include<windows.h>
+#include<time.h>
+#include<unistd.h>
+
+#define CIMA 72
+#define BAIXO 80
+#define ENTER 13
+
+enum personagem {Bill = 1, Francis, Nick};
+enum painel {JOGAR = 1, INSTRUCOES, CREDITOS};
+
+struct hero{	
+};
+
+//-------------- FUNÇÕES --------------
+
+void abertura(){
+
+   char abertura[8][25] = {{219,219,219,219,219,0  ,219,219,219,0  ,219,0  ,0  ,0  ,219,0  ,219,219,219,0  ,219,0  ,219,219,219},
+                           {0  ,0  ,0  ,0  ,219,0  ,219,0  ,219,0  ,219,219,0  ,219,219,0  ,219,0  ,219,0  ,219,0  ,219,0  ,0  },
+                           {0  ,0  ,219,219,0  ,0  ,219,0  ,219,0  ,219,0  ,219,0  ,219,0  ,219,219,0  ,0  ,219,0  ,219,219,219},
+                           {0  ,219,0  ,0  ,0  ,0  ,219,0  ,219,0  ,219,0  ,0  ,0  ,219,0  ,219,0  ,219,0  ,219,0  ,219,0  ,0  },
+                           {219,219,219,219,219,0  ,219,219,219,0  ,219,0  ,0  ,0  ,219,0  ,219,219,219,0  ,219,0  ,219,219,219}};
+
+
+   int i = 0;
+   int j = 0;
+   printf("\n\n\n\n\n\n");
+   for(i = 0; i < 8; i++){
+      printf("\n");
+      printf("\t\t\t");
+      for(j = 0; j < 25; j++){
+         printf("%c", abertura[i][j]);
+      }
+   }
+   printf("\n\t\t\t\tPRESS START...");
+   printf("\n\n\n\n\n\n");
+   system("pause");
+   system("cls");
+   printf("\n\n\n\n\n\n");
+   for(i = 0; i < 8; i++){
+      printf("\n");
+      printf("\t\t\t");
+      for(j = 0; j < 25; j++){
+         printf("%c", abertura[i][j]);
+      }
+   }
+   printf("\n\t\t\t");
+   for(i = 0; i < 25; i++){
+      printf("%c",219);       //for para fazer o carregando
+      Sleep(100);            //Precisa da windows.h pra funcionar
+   }
+   printf("\a");
+   printf("\n\n\n\n\n\n");
+   system("cls");
+}
+
+//----------------------------------------------------------------------------
+
+void painel(){
+	setlocale(LC_ALL, "");
+	int aux = 0;
+
+	char *result;
+	char texto[100];
+	int sair = 0;
+    FILE *f;
+
+
+	char menu[4][11]= {{' ','J','O','G','A','R',' ',' ',' ',' ',' '},
+                        {' ','I','N','S','T','R','U','Ç','Ô','E','S'},
+                        {' ','C','R','É','D','I','T','O','S',' ',' '},
+                        {' ','S','A','I','R',' ',' ',' ',' ',' ',' '}};
+
+   int i, opcao = 1, j = 0, ii = 0, jj = 0;
+   int saida = 0;
+   char escolha;
+
+   char abertura[8][25] = {{219,219,219,219,219,0  ,219,219,219,0  ,219,0  ,0  ,0  ,219,0  ,219,219,219,0  ,219,0  ,219,219,219},
+                           {0  ,0  ,0  ,0  ,219,0  ,219,0  ,219,0  ,219,219,0  ,219,219,0  ,219,0  ,219,0  ,219,0  ,219,0  ,0  },
+                           {0  ,0  ,219,219,0  ,0  ,219,0  ,219,0  ,219,0  ,219,0  ,219,0  ,219,219,0  ,0  ,219,0  ,219,219,219},
+                           {0  ,219,0  ,0  ,0  ,0  ,219,0  ,219,0  ,219,0  ,0  ,0  ,219,0  ,219,0  ,219,0  ,219,0  ,219,0  ,0  },
+                           {219,219,219,219,219,0  ,219,219,219,0  ,219,0  ,0  ,0  ,219,0  ,219,219,219,0  ,219,0  ,219,219,219}};
+
+
+   while(saida == 0){
+      system("cls");
+
+    	printf("\n\n\n\n\n\n");
+   		for(i = 0; i < 8; i++)
+   		{
+      		printf("\n");
+      		printf("\t\t\t");
+      		for(j = 0; j < 25; j++)
+      		{
+         		printf("%c", abertura[i][j]);
+      		}
+      	}
+
+
+
+      for(i = 0; i < 4; i++){
+         menu[i][0] = ' ';
+      }
+      printf("\n");
+      menu[opcao-1][0] = '>';
+      printf("\t\t\t");
+      for(i = 0;i < 7; i++){
+         printf ("%c",menu[0][i]);
+      }
+      printf("\n");
+      printf("\t\t\t");
+      for(i = 0; i < 11; i++){
+         printf ("%c",menu[1][i]);
+      }
+      printf("\n");
+      printf("\t\t\t");
+      for(i = 0; i < 11; i++){
+         printf ("%c",menu[2][i]);
+      }
+      printf("\n");
+      printf("\t\t\t");
+      for(i = 0; i < 5; i++){
+         printf ("%c",menu[3][i]);
+      }
+      printf("\n");
+      fflush(stdin);
+      escolha = getch();
+      if (escolha == CIMA){
+         if (opcao == 1){
+            opcao = 4;
+         }
+         else{
+            opcao--;
+         }
+      }else if(escolha == BAIXO){
+         if (opcao == 4){
+            opcao = 1;
+         }
+         else{
+            opcao++;
+         }
+      }
+      if (escolha == ENTER){
+         switch(opcao){
+            case 1:
+               saida = 1;
+               system("cls");
+               break;
+            case 2:
+               system("cls");
+				   f = fopen("instrucoes.txt","rt");
+				while(!feof(f)){
+						fgets(texto,100,f);
+						printf(texto);
+					}
+				fclose(f);
+				printf("\nPressione qualquer tecla para retornar ao menu...\n");
+				getch();
+				system("cls");
+               break;
+            case 3:
+               system("cls");
+               	f = fopen("creditos.txt","rt");
+				while(!feof(f)){
+						fgets(texto,100,f);
+						printf(texto);
+					}
+				fclose(f);
+				printf("\nPressione qualquer tecla para retornar ao menu...\n");
+				getch();
+				system("cls");
+               break;
+            case 4:
+               exit(0);
+               break;
+            default:
+               break;
+         }
+      }
+   }
+}
+
+//--------------------------------------------------
+
+
+void charc(struct hero* charhero){
+	char s[20];
+	int n = 0;
+	printf("ESCOLHA UM PERSONAGEM:\n\n");
+	
+	printf("-------------------------------------------------------------------------------\n");
+	printf("%d - Bill: Vive em Oregon, ex-fuzileiro, tem amplo conhecimento e habilidade no\nmanuseio de armas de fogo.\n\n", Bill);
+	printf("Raciocínio Lógico: 74 // Físico: 95 // Arsenal: 79 // Hab. com armas: 98\n\n");
+	printf("-------------------------------------------------------------------------------\n");
+	printf("%d - Francis: Criado numa fazenda em Dallas, seu pai o ensinou a caçar, e como \nconsequencia, se tornou um grande observador e muito preciso em seus atos.\n\n", Francis);
+	printf("Raciocínio Lógico: 98 // Físico: 85 // Arsenal: 64 // Hab. com armas: 75\n\n");
+	printf("-------------------------------------------------------------------------------\n");
+	printf("%d - Nick: Mora em Las Vegas, é de familia rica, sempre gostou de armas de fogo,\nporém nunca aperfeiçoou suas habilidades.\n\n", Nick);
+	printf("Raciocínio Lógico: 58 // Físico: 48 // Arsenal: 98 // Hab. com armas: 55\n\n");
+	printf("-------------------------------------------------------------------------------\n");
+
+	printf("\nDigite a opção desejada: ");
+
+	fflush(stdin);
+	scanf("%d", &n);
+	if(n<1 || n>3){
+		printf("\nAlgo deu errado, tende novamente!\n");
+		charc(charhero);
+	}
+}
+
+
+// -------------- MAIN --------------
+
+   struct hero charhero;
+
+   int main(){
+	
+		setlocale(LC_ALL, "PORTUGUESE");
+		system("cls");
+		abertura();
+		painel();
+
+		charc(&charhero);
+		getch();
+		
+}
